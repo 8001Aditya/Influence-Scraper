@@ -4,7 +4,11 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv(os.path.join(os.path.dirname(__file__), "env", ".env"))
+BASE_DIR = os.path.dirname(__file__)
+
+# Load project root .env first, then optional legacy env/.env without overriding.
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+load_dotenv(os.path.join(BASE_DIR, "env", ".env"), override=False)
 
 
 def _env_bool(name: str, default: bool) -> bool:
